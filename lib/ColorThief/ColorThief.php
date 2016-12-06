@@ -141,6 +141,7 @@ class ColorThief
         // Send array to quantize function which clusters values
         // using median cut algorithm
         $cmap = static::quantize($pixelArray, $colorCount);
+
         $palette = $cmap->palette();
 
         return $palette;
@@ -203,7 +204,7 @@ class ColorThief
             $y = (int) ($startY + $i / $width);
             $color = $image->getPixelColor($x, $y);
 
-            if (static::isClearlyVisible($color) && static::isNonWhite($color)) {
+            if (static::isClearlyVisible($color)) {
                 $pixelArray[$size++] = static::getColorIndex($color->red, $color->green, $color->blue, 8);
                 // TODO : Compute directly the histogram here ? (save one iteration over all pixels)
             }
