@@ -245,6 +245,11 @@ class ColorThief
      */
     private static function vboxFromHistogram(array $histo)
     {
+      if (count($histo) === 1) {
+        $rgb = static::getColorsFromIndex(array_keys($histo)[0], 0, ColorThief::SIGBITS);
+        return new VBox($rgb[0], $rgb[1], $rgb[2], $rgb[0], $rgb[1], $rgb[2], $histo);
+      }
+
         $rgbMin = array(PHP_INT_MAX, PHP_INT_MAX, PHP_INT_MAX);
         $rgbMax = array(0, 0, 0);
 
